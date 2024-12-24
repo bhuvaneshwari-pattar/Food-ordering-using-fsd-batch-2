@@ -1,0 +1,204 @@
+//script.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Ordering</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header">
+    <h1>Foodie's Delight</h1>
+  </header>
+
+  <main class="menu">
+    <h2>Menu</h2>
+    <div class="menu-item">
+      <img src="burger.jpg" alt="Burger">
+      <div class="item-info">
+        <h3>Burger</h3>
+        <p>Delicious grilled burger</p>
+        <span>$5.99</span>
+        <button>Add to Cart</button>
+      </div>
+    </div>
+    <div class="menu-item">
+      <img src="pizza.jpg" alt="Pizza">
+      <div class="item-info">
+        <h3>Pizza</h3>
+        <p>Cheesy and delightful</p>
+        <span>$8.99</span>
+        <button>Add to Cart</button>
+      </div>
+    </div>
+    <div class="menu-item">
+      <img src="pasta.jpg" alt="Pasta">
+      <div class="item-info">
+        <h3>Pasta</h3>
+        <p>Creamy and savory</p>
+        <span>$7.49</span>
+        <button>Add to Cart</button>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>© 2024 Foodie's Delight. All rights reserved.</p>
+  </footer>
+</body>
+</html>
+
+
+//script.css
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+  }
+  
+  .header {
+    background-color: #ff6347;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+  }
+  
+  .header h1 {
+    margin: 0;
+  }
+  
+  .menu {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .menu h2 {
+    text-align: center;
+    color: #ff6347;
+  }
+  
+  .menu-item {
+    display: flex;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 1rem 0;
+    overflow: hidden;
+  }
+  
+  .menu-item img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+  }
+  
+  .item-info {
+    padding: 1rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .item-info h3 {
+    margin: 0;
+    font-size: 1.2rem;
+  }
+  
+  .item-info p {
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  .item-info span {
+    font-weight: bold;
+    color: #ff6347;
+  }
+  
+  .item-info button {
+    background-color: #ff6347;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .item-info button:hover {
+    background-color: #e5533c;
+  }
+  
+  .footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #333;
+    color: white;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+
+
+
+//script.js
+// Menu items data
+const menu = [
+  { id: 1, name: "Burger", description: "Delicious grilled burger", price: 5.99, image: "burger.jpg" },
+  { id: 2, name: "Pizza", description: "Cheesy and delightful", price: 8.99, image: "pizza.jpg" },
+  { id: 3, name: "Pasta", description: "Creamy and savory", price: 7.49, image: "pasta.jpg" },
+];
+
+let cart = [];
+
+// Render menu items
+const menuContainer = document.getElementById("menu-items");
+
+menu.forEach((item) => {
+  const menuItem = document.createElement("div");
+  menuItem.classList.add("menu-item");
+  menuItem.innerHTML = `
+    <img src="${item.image}" alt="${item.name}">
+    <div class="item-info">
+      <h3>${item.name}</h3>
+      <p>${item.description}</p>
+      <span>$${item.price.toFixed(2)}</span>
+      <button onclick="addToCart(${item.id})">Add to Cart</button>
+    </div>
+  `;
+  menuContainer.appendChild(menuItem);
+});
+
+// Add item to cart
+function addToCart(itemId) {
+  const item = menu.find((menuItem) => menuItem.id === itemId);
+  cart.push(item);
+  renderCart();
+}
+
+// Render cart
+const cartContainer = document.getElementById("cart-items");
+const totalPriceElement = document.getElementById("total-price");
+
+function renderCart() {
+  cartContainer.innerHTML = "";
+  let total = 0;
+
+  cart.forEach((item) => {
+    const cartItem = document.createElement("li");
+    cartItem.innerHTML = `
+      <span>${item.name}</span>
+      <span>$${item.price.toFixed(2)}</span>
+    `;
+    cartContainer.appendChild(cartItem);
+    total += item.price;
+  });
+
+  totalPriceElement.textContent=Total=$$;{total.toFixed(2)};
+}
